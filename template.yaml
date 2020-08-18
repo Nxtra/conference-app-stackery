@@ -50,11 +50,16 @@ Resources:
             ApiId: !Ref HttpApi
             PayloadFormatVersion: '2.0'
             TimeoutInMillis: 29000
-      ReservedConcurrentExecutions: 2
+      ReservedConcurrentExecutions: 20
       Environment:
         Variables:
           TABLE_NAME: !Ref LearningsTable
           TABLE_ARN: !GetAtt LearningsTable.Arn
+          LOG_LEVEL: INFO
+          POWERTOOLS_LOGGER_SAMPLE_RATE: 0.05
+          POWERTOOLS_LOGGER_LOG_EVENT: true
+          POWERTOOLS_SERVICE_NAME: learnings
+          POWERTOOLS_METRICS_NAMESPACE: ServerlessConference
   LearningsTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -89,10 +94,14 @@ Resources:
             Stream: !GetAtt LearningsTable.StreamArn
             StartingPosition: TRIM_HORIZON
             BatchSize: 1
-      ReservedConcurrentExecutions: 2
+      ReservedConcurrentExecutions: 20
       Environment:
         Variables:
           SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+          LOG_LEVEL: INFO
+          POWERTOOLS_LOGGER_LOG_EVENT: true
+          POWERTOOLS_SERVICE_NAME: learnings
+          POWERTOOLS_METRICS_NAMESPACE: ServerlessConference
   GetAllLearningsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -114,6 +123,9 @@ Resources:
         Variables:
           TABLE_NAME: !Ref LearningsTable
           TABLE_ARN: !GetAtt LearningsTable.Arn
+          LOG_LEVEL: INFO
+          POWERTOOLS_SERVICE_NAME: learnings
+          POWERTOOLS_METRICS_NAMESPACE: ServerlessConference
       Events:
         HttpApiGETlearnings:
           Type: HttpApi
@@ -123,7 +135,7 @@ Resources:
             ApiId: !Ref HttpApi
             PayloadFormatVersion: '2.0'
             TimeoutInMillis: 29000
-      ReservedConcurrentExecutions: 2
+      ReservedConcurrentExecutions: 20
 Parameters:
   StackTagName:
     Type: String
