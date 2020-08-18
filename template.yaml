@@ -87,6 +87,9 @@ Resources:
             StartingPosition: TRIM_HORIZON
             BatchSize: 1
       ReservedConcurrentExecutions: 2
+      Environment:
+        Variables:
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
   GetAllLearningsFunction:
     Type: AWS::Serverless::Function
     Properties:
