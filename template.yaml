@@ -15,9 +15,12 @@ Resources:
               responses: {}
             post:
               responses: {}
-      FailOnWarnings: true
+          /{proxy+}:
+              responses: {}
       CorsConfiguration:
         AllowOrigins:
+          - '*'
+        AllowHeaders:
           - '*'
         AllowMethods:
           - '*'
