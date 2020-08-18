@@ -1,2 +1,4 @@
 stack-name: conference-app
 template-path: template.yaml
+env-name: dev
+aws-profile: default
