@@ -1,0 +1,23 @@
+config:
+  target: 'https://dxcg7rsph2.execute-api.eu-west-1.amazonaws.com'
+  phases:
+    - duration: 120
+      arrivalRate: 1
+      rampTo: 10
+      name: "Ramp up to warm up the application"
+  payload:
+    path: "learnings.csv"
+    fields:
+      - "creator"
+      - "learning"
+      - "session"
+      - "category"
+scenarios:
+  - flow:
+      - post:
+          url: "/learnings"
+          json:
+            creator: "{{ creator }}"
+            learning: "{{ learning }}"
+            session: "{{ session }}"
+            category: "{{ category }}"

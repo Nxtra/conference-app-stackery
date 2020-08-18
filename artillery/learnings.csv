@@ -1,0 +1,4 @@
+creator,learning,session,category
+Nick,openID connect is build on top of oauth,security-with-oauth-2-0-and-openid-connect,security
+Nick,the authorization_code grant type can be secure without a client_secret by using PKCE,security-with-oauth-2-0-and-openid-connect,security
+Nick,Use Digitalisation to build a competitive advantage over others,keynote,API
